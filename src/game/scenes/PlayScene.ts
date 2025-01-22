@@ -33,7 +33,7 @@ class PlayScene extends Scene {
     constructor() {
         super()
         this.setState(state.START)
-        this.audio = new Audio("../../assets/sounds/theme.mp3")
+        this.audio = new Audio("../../../assets/sounds/theme.mp3")
         this.audio.loop = true
     }
 
