@@ -113,7 +113,7 @@ const sprite = {
     },
 
     BACKGROUND_SPRITE: {
-        clip: { coor: new Vector2D(0, 0), width: 4191, height: 2101, scale: 0.24 } as SpriteClip,
+        clip: { coor: new Vector2D(0, 0), width: 1000, height: 501, scale: 1.007 } as SpriteClip,
         adjust: new Vector2D(0, 0),
     },
 
