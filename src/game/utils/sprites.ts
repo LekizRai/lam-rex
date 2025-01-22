@@ -2,6 +2,16 @@ import { SpriteClip } from '../../engine/types/general'
 import Vector2D from '../../engine/types/Vector2D'
 
 const sprite = {
+    LAM_SPRITE: {
+        clip: { coor: new Vector2D(0, 0), width: 123, height: 176, scale: 0.35 } as SpriteClip,
+        adjust: new Vector2D(0, 0),
+    },
+
+    MAI_SPRITE: {
+        clip: { coor: new Vector2D(0, 0), width: 78, height: 119, scale: 0.7 } as SpriteClip,
+        adjust: new Vector2D(0, 0),
+    },
+
     CLOUD_SPRITE: {
         clip: { coor: new Vector2D(164, 0), width: 96, height: 32, scale: 0.5 } as SpriteClip,
         adjust: new Vector2D(0, 0),
@@ -17,6 +27,11 @@ const sprite = {
             adjust: new Vector2D(0, -4),
         },
     ],
+
+    OBSTACLE_SPRITE: {
+        clip: { coor: new Vector2D(0, 0), width: 100, height: 105, scale: 0.5 } as SpriteClip,
+        adjust: new Vector2D(0, 0),
+    },
 
     CACTUS_SPRITES: [
         {
@@ -94,6 +109,16 @@ const sprite = {
 
     GROUND_SPRITE: {
         clip: { coor: new Vector2D(0, 102), width: 2404, height: 28, scale: 0.5 } as SpriteClip,
+        adjust: new Vector2D(0, 0),
+    },
+
+    BACKGROUND_SPRITE: {
+        clip: { coor: new Vector2D(0, 0), width: 4191, height: 2101, scale: 0.24 } as SpriteClip,
+        adjust: new Vector2D(0, 0),
+    },
+
+    GAMEOVER_1_SPRITE: {
+        clip: { coor: new Vector2D(0, 0), width: 2930, height: 621, scale: 0.1 } as SpriteClip,
         adjust: new Vector2D(0, 0),
     },
 

@@ -34,7 +34,7 @@ module.exports = {
         },
     },
     plugins: [
-        new HtmlWebpackPlugin({ gameName: 'T-Rex 2.0', template: 'index.html' }),
+        new HtmlWebpackPlugin({ gameName: 'Vinh Lam Overcomes Tieu Cuc', template: 'index.html' }),
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'assets', to: 'assets' },

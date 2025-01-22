@@ -1,3 +1,4 @@
+import Collider from '../components/Collider'
 import { SpriteClip, TexInfo } from '../types/general'
 import Drawer from '../utils/webgl-utils/Drawer'
 import Vector2D from '../types/Vector2D'
@@ -27,9 +28,13 @@ abstract class Image extends GameObject {
                 this.getX(),
                 this.getY(),
                 this.sprite.width * this.sprite.scale,
-                this.sprite.height * this.sprite.scale
+                this.sprite.height * this.sprite.scale,
+                this.getRotatingRatioX(),
+                this.getRotatingRatioY(),
+                this.getAngle() / 180 * Math.PI
             )
         }
+        
     }
 
     public setSprite(sprite: SpriteClip): void {

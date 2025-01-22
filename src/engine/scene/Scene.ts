@@ -13,6 +13,8 @@ abstract class Scene {
     private toRemoveObjectList: GameObject[]
 
     protected inputHandler: InputHandler
+    protected audio: HTMLAudioElement
+    protected played: boolean
 
     constructor() {
         this.objectList = []
@@ -21,6 +23,8 @@ abstract class Scene {
         this.inputHandler = InputHandler.getInstance()
         this.isUpdated = true
         this.isRendered = true
+
+        this.played = false
 
         this.setup()
     }
@@ -47,6 +51,14 @@ abstract class Scene {
             this.objectList.forEach((obj) => {
                 obj.update(timeInterval)
             })
+            if (this.played && this.audio && this.audio.paused) {
+                this.audio.play()
+            }
+        }
+        else {
+            if (this.audio && !this.audio.paused) {
+                this.audio.pause()
+            }
         }
     }
 

@@ -1,12 +1,11 @@
 import config from '../../utils/configs'
 import Cactus from './cactus/Cactus'
-import Bird from './bird/Bird'
 import utils from '../../../engine/utils/utils'
 import GameObject from '../../../engine/objects/base-classes/GameObject'
 import Image from '../../../engine/objects/Image'
 import Animation from '../../../engine/objects/Animation'
 import Vector2D from '../../../engine/types/Vector2D'
-import TRex from '../trex/TRex'
+import TRex from '../lamrex/LamRex'
 import Message from '../../../engine/controllers/Message'
 import SceneManager from '../../../engine/controllers/SceneManager'
 
@@ -61,7 +60,7 @@ class ObstacleGroup extends GameObject {
         }
 
         if (this.obstacleGeneratingInterval - timeInterval < 0) {
-            let timeShift: number = utils.randomInt(-500, 500)
+            let timeShift: number = utils.randomInt(-1000, 1000)
             this.obstacleGeneratingInterval = config.OBSTACLE_GENERATING_INTERVAL + timeShift
             this.obstacleGeneratingInterval = Math.floor(
                 (this.obstacleGeneratingInterval * 450) / this.getVelocityX()
@@ -97,18 +96,8 @@ class ObstacleGroup extends GameObject {
     }
 
     public spawn(): void {
-        let index: number = utils.randomInt(0, 9)
         let newObstacle: GameObject
-        if (index >= 8) {
-            let status: number = utils.randomInt(0, 9)
-            if (status <= 7) {
-                newObstacle = new Bird(config.BIRD_HIGH_CANVAS_LOCATION)
-            } else {
-                newObstacle = new Bird(config.BIRD_LOW_CANVAS_LOCATION)
-            }
-        } else {
-            newObstacle = new Cactus(config.CACTUS_CANVAS_LOCATION)
-        }
+        newObstacle = new Cactus(config.CACTUS_CANVAS_LOCATION)
         newObstacle.setVelocityX(this.getVelocityX())
         this.addObject(newObstacle)
         this.getScene().addObject(newObstacle)

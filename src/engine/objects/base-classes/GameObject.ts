@@ -13,6 +13,8 @@ import Scene from '../../scene/Scene'
 abstract class GameObject {
     private scene: Scene
     private location: Vector2D
+    private angle: number
+    private rotatingRatio: Vector2D
     private colliderList: Collider[]
     private rigidBody: RigidBody
     private zIndex: number
@@ -28,7 +30,7 @@ abstract class GameObject {
 
     private isDestroyed: boolean
 
-    constructor(location: Vector2D, zIndex?: number) {
+    constructor(location: Vector2D, zIndex?: number, angle?: number, rotatingRatio?: Vector2D) {
         this.location = location.copy()
         this.colliderList = []
         this.rigidBody = new RigidBody(0, 0, 0)
@@ -42,6 +44,20 @@ abstract class GameObject {
             this.zIndex = zIndex
         } else {
             this.zIndex = 0
+        }
+
+        if (angle) {
+            this.angle = angle
+        }
+        else {
+            this.angle = 0.0
+        }
+
+        if (rotatingRatio) {
+            this.rotatingRatio = rotatingRatio.copy()
+        }
+        else {
+            this.rotatingRatio = new Vector2D(0.5, 0.5)
         }
 
         this.isRendered = true
@@ -72,6 +88,40 @@ abstract class GameObject {
 
     public setY(y: number): void {
         this.location.setY(y)
+    }
+
+    // About angle
+    public getAngle(): number {
+        return this.angle
+    }
+
+    public setAngle(angle: number): void {
+        this.angle = angle
+    }
+
+    // About rotating ratio
+    public getRotatingRatio(): Vector2D {
+        return this.rotatingRatio
+    }
+
+    public setRotatingRatio(rotatingRatio: Vector2D): void {
+        this.rotatingRatio = rotatingRatio.copy()
+    }
+
+    public getRotatingRatioX(): number {
+        return this.rotatingRatio.getX()
+    }
+
+    public setRotatingRatioX(rotatingRatioX: number): void {
+        this.rotatingRatio.setX(rotatingRatioX)
+    }
+
+    public getRotatingRatioY(): number {
+        return this.rotatingRatio.getY()
+    }
+
+    public setRotatingRatioY(rotatingRatioY: number): void {
+        this.rotatingRatio.setY(rotatingRatioY)
     }
 
     // About Z index

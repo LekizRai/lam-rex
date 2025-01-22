@@ -1,13 +1,12 @@
-import Text from '../../../engine/objects/Text'
+import Image from '../../../engine/objects/Image'
 import Message from '../../../engine/controllers/Message'
 import Vector2D from '../../../engine/types/Vector2D'
 import sprite from '../../utils/sprites'
 
-class GameOver extends Text {
+class GameOver extends Image {
     constructor() {
-        super(new Vector2D(350, 182))
-        this.setTex(this.resourceManager.getTex(0))
-        this.setContent('GAMEOVER')
+        super(new Vector2D(350, 160), sprite.GAMEOVER_1_SPRITE.clip)
+        this.setTex(this.resourceManager.getTex(6))
     }
 
     public handleInput(message: Message): void {}
@@ -15,8 +14,8 @@ class GameOver extends Text {
     public update(timeInterval: number): void {}
 
     protected contentToSpriteList(): void {
-        this.spriteList.length = 0
-        this.spriteList.push(sprite.GAMEOVER_SPRITE.clip)
+        // this.spriteList.length = 0
+        // this.spriteList.push(sprite.GAMEOVER_SPRITE.clip)
     }
 }
 

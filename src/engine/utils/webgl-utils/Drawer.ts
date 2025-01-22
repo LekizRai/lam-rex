@@ -173,7 +173,10 @@ void main() {
         dstX: number,
         dstY: number,
         dstWidth: number,
-        dstHeight: number
+        dstHeight: number,
+        rotatingRatioX?: number,
+        rotatingRatioY?: number,
+        angleInRadian?: number
     ): void {
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height)
 
@@ -185,19 +188,38 @@ void main() {
         let texcoords = [0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1]
         this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(texcoords), this.gl.STATIC_DRAW)
 
-        this.drawImage(
-            tex.texture,
-            tex.width,
-            tex.height,
-            srcX,
-            srcY,
-            srcWidth,
-            srcHeight,
-            dstX,
-            dstY,
-            dstWidth,
-            dstHeight
-        )
+        if (rotatingRatioX && rotatingRatioY && angleInRadian) { 
+            this.drawImage(
+                tex.texture,
+                tex.width,
+                tex.height,
+                srcX,
+                srcY,
+                srcWidth,
+                srcHeight,
+                dstX,
+                dstY,
+                dstWidth,
+                dstHeight,
+                rotatingRatioX,
+                rotatingRatioY,
+                angleInRadian
+            )
+        } else {
+            this.drawImage(
+                tex.texture,
+                tex.width,
+                tex.height,
+                srcX,
+                srcY,
+                srcWidth,
+                srcHeight,
+                dstX,
+                dstY,
+                dstWidth,
+                dstHeight
+            )
+        }
     }
 
     public clear(): void {
@@ -215,7 +237,10 @@ void main() {
         dstX: number,
         dstY: number,
         dstWidth: number,
-        dstHeight: number
+        dstHeight: number,
+        rotatingRatioX?: number,
+        rotatingRatioY?: number,
+        angleInRadian?: number
     ): void {
         if (this.gl) {
             this.gl.bindTexture(this.gl.TEXTURE_2D, tex)
@@ -237,9 +262,23 @@ void main() {
                 -1,
                 1
             )
+
+            // At very first stage, the texture will have the size as 1x1, remember that
+            // Translate
             matrix = utils.m4.translate(matrix, dstX, dstY, 0)
+
+            // Rotate
+            if (rotatingRatioX && rotatingRatioY && angleInRadian) {
+                matrix = utils.m4.translate(matrix, rotatingRatioX * dstWidth, rotatingRatioY * dstHeight, 0)
+                matrix = utils.m4.zRotate(matrix, angleInRadian)
+                matrix = utils.m4.translate(matrix, -rotatingRatioX * dstWidth, -rotatingRatioY * dstHeight, 0)
+            }
+
+            // Scale
             matrix = utils.m4.scale(matrix, dstWidth, dstHeight, 1)
+
             this.gl.uniformMatrix4fv(this.matrixLocation, false, matrix)
+
 
             let texMatrix = utils.m4.translation(srcX / texWidth, srcY / texHeight, 0)
             texMatrix = utils.m4.scale(texMatrix, srcWidth / texWidth, srcHeight / texHeight, 1)
